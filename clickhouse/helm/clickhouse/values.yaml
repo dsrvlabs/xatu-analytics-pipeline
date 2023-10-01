@@ -3,8 +3,8 @@ fullnameOverride: xatu-clickhouse
 clickhouse:
   resources:
     requests:
-      cpu: 7
-      memory: 15Gi
+      cpu: 1
+      memory: 2Gi
   fullnameOverride: xatu-clickhouse
   image:
     tag: "23.6"
@@ -24,10 +24,10 @@ clickhouse:
       # merge_tree/old_parts_lifetime: 10
       # merge_tree/temporary_directories_lifetime: 10
     users:
-      operator/password: FILL_ME
-      admin/password: FILL_ME
-      grafana/password: FILL_ME
-      vector/password: FILL_ME
+      operator/password: validators2023
+      admin/password: validators2023
+      grafana/password: validators2023
+      vector/password: validators2023
     profiles:
       grafana/max_memory_usage: 1073741824 # 1Gi
     zookeeper:
@@ -44,7 +44,7 @@ clickhouse:
   volumeClaimTemplates:
   - name: default
     spec:
-      storageClassName: FILL_ME
+      storageClassName: standard-gp3
       accessModes:
         - ReadWriteOnce
       resources:

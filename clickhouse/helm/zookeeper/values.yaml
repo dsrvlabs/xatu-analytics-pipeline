@@ -29,15 +29,15 @@ zookeeper:
 
   persistence:
     enabled: true
-    storageClass: FILL_ME
+    storageClass: standard-gp3
     size: 10Gi
 
   replicaCount: 3
 
   resources:
     requests:
-      cpu: 1
-      memory: 5Gi
+      cpu: 500m
+      memory: 1Gi
     limits:
-      cpu: 2
-      memory: 7Gi
+      cpu: 1
+      memory: 2Gi
