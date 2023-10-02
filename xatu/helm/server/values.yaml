@@ -23,37 +23,37 @@ xatu-server:
       cpu: 128m
       memory: 256Mi
 
-      # initContainers:
-      #   - image: alpine
-      #     command:
-      #       - /bin/sh
-      #       - -c
-      #       - |
-      #         mkdir -p /etc/maxmind/
-      #         cd /etc/maxmind/
-      #         apk add wget
-      #         wget -O city.tar.gz "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=FILL_ME&suffix=tar.gz"
-      #         tar -xf city.tar.gz
-      #         mv "$(ls -d */|head -n 1)/GeoLite2-City.mmdb" ./
-      #         rm -rf $(ls -d */|head -n 1)
-      #         rm city.tar.gz
-      #         wget -O city.tar.gz "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=FILL_ME&suffix=tar.gz"
-      #         tar -xf city.tar.gz
-      #         mv "$(ls -d */|head -n 1)/GeoLite2-ASN.mmdb" ./
-      #         rm -rf $(ls -d */|head -n 1)
-      #         rm city.tar.gz
-      #     name: init-maxmind
-      #     volumeMounts:
-      #       - name: maxmind
-      #         mountPath: /etc/maxmind
+  initContainers:
+    - image: alpine
+      command:
+        - /bin/sh
+        - -c
+        - |
+          mkdir -p /etc/maxmind/
+          cd /etc/maxmind/
+          apk add wget
+          wget -O city.tar.gz "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=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&suffix=tar.gz"
+          tar -xf city.tar.gz
+          mv "$(ls -d */|head -n 1)/GeoLite2-City.mmdb" ./
+          rm -rf $(ls -d */|head -n 1)
+          rm city.tar.gz
+          wget -O city.tar.gz "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=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&suffix=tar.gz"
+          tar -xf city.tar.gz
+          mv "$(ls -d */|head -n 1)/GeoLite2-ASN.mmdb" ./
+          rm -rf $(ls -d */|head -n 1)
+          rm city.tar.gz
+      name: init-maxmind
+      volumeMounts:
+        - name: maxmind
+          mountPath: /etc/maxmind
 
-      # extraVolumeMounts:
-      #   - name: maxmind
-      #     mountPath: /etc/maxmind
+  extraVolumeMounts:
+    - name: maxmind
+      mountPath: /etc/maxmind
 
-      # extraVolumes:
-      #   - name: maxmind
-      #     emptyDir: {}
+  extraVolumes:
+    - name: maxmind
+      emptyDir: {}
 
   config:
     logging: "info"
@@ -63,13 +63,12 @@ xatu-server:
     pprofAddr: ":6060"
     ntpServer: time.google.com
     geoip:
-      enabled: false
-      # enabled: true
-      # type: maxmind
-      # config:
-      #   database:
-      #     city: /etc/maxmind/GeoLite2-City.mmdb
-      #     asn: /etc/maxmind/GeoLite2-ASN.mmdb
+      enabled: true
+      type: maxmind
+      config:
+        database:
+          city: /etc/maxmind/GeoLite2-City.mmdb
+          asn: /etc/maxmind/GeoLite2-ASN.mmdb
     persistence:
       enabled: true
       connectionString: postgres://admin:validators2023@svc-postgres-xatu.xatu-eth.svc.cluster.local:5432/xatu_eth?sslmode=disable

@@ -1,0 +1,4 @@
+*.swo
+*.swo
+*.lock
+**/charts/

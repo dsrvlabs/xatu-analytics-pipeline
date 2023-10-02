@@ -17,11 +17,11 @@ xatu-mimicry:
     pprofAddr: ":6060"
     probeAddr: ":8080"
     captureDelay: 3m
-    name:  FILL_ME
+    name:  "xatu-eth-mimicry-dsrv"
     coordinator:
       type: xatu
       config:
-        address: FILL_ME
+        address: xatu-server.xatu-eth.svc.cluster.local:8080
         maxPeers: 100
         networkIds:
         - 1
@@ -31,5 +31,7 @@ xatu-mimicry:
     - name: grpc
       type: xatu
       config:
-        address: FILL_ME
+        address: xatu-server.xatu-eth.svc.cluster.local:8080
         maxExportBatchSize: 32
+    - name: stdout
+      type: stdout

@@ -14,7 +14,7 @@ xatu-discovery:
     metricsAddr: ":9090"
     pprofAddr: ":6060"
     coordinator:
-      address: FILL_ME
+      address: xatu-server.xatu-eth.svc.cluster.local:8080
       maxQueueSize: 51200
       batchTimeout: 5s
       exportTimeout: 30s
