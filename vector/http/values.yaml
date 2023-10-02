@@ -3,16 +3,16 @@ vector:
 
   resources:
     requests:
-      cpu: 1
-      memory: 512Mi
+      cpu: 500m
+      memory: 256Mi
     limits:
-      cpu: 2
-      memory: 2Gi
+      cpu: 1
+      memory: 1Gi
 
   autoscaling:
     enabled: true
-    minReplicas: 5
-    maxReplicas: 12
+    minReplicas: 2
+    maxReplicas: 3
     targetCPUUtilizationPercentage: 85
 
   podDisruptionBudget:
@@ -139,7 +139,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_beacon_committee
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-beacon-committee
         acknowledgements:
@@ -155,7 +155,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_head
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-head
         acknowledgements:
@@ -171,7 +171,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_head_v2
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-head-v2
         acknowledgements:
@@ -187,7 +187,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_block
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-block
         acknowledgements:
@@ -203,7 +203,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_block_v2
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-block-v2
         acknowledgements:
@@ -219,7 +219,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_attestation
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-attestation
         acknowledgements:
@@ -235,7 +235,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_attestation_v2
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-attestation-v2
         acknowledgements:
@@ -251,7 +251,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_validator_attestation_data
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-validator-attestation-data
         acknowledgements:
@@ -267,7 +267,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_voluntary_exit
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-voluntary-exit
         acknowledgements:
@@ -283,7 +283,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_voluntary_exit_v2
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-voluntary-exit-v2
         acknowledgements:
@@ -299,7 +299,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_finalized_checkpoint
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-finalized-checkpoint
         acknowledgements:
@@ -315,7 +315,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_finalized_checkpoint_v2
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-finalized-checkpoint-v2
         acknowledgements:
@@ -331,7 +331,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_chain_reorg
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-chain-reorg
         acknowledgements:
@@ -347,7 +347,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_chain_reorg_v2
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-chain-reorg-v2
         acknowledgements:
@@ -363,7 +363,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_contribution_and_proof
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-contribution-and-proof
         acknowledgements:
@@ -379,7 +379,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_events_contribution_and_proof_v2
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-events-contribution-and-proof-v2
         acknowledgements:
@@ -395,7 +395,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.mempool_transaction
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: mempool-transaction
         acknowledgements:
@@ -411,7 +411,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.mempool_transaction_v2
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: mempool-transaction-v2
         acknowledgements:
@@ -427,7 +427,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v2_beacon_block
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v2-beacon-block
         acknowledgements:
@@ -445,7 +445,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v2_beacon_block_v2
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v2-beacon-block-v2
         acknowledgements:
@@ -463,7 +463,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_debug_fork_choice
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-debug-fork-choice
         acknowledgements:
@@ -481,7 +481,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_debug_fork_choice_v2
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-debug-fork-choice-v2
         acknowledgements:
@@ -499,7 +499,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_debug_fork_choice_reorg
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-debug-fork-choice-reorg
         acknowledgements:
@@ -517,7 +517,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v1_debug_fork_choice_reorg_v2
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v1-debug-fork-choice-reorg-v2
         acknowledgements:
@@ -535,7 +535,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v2_beacon_block_proposer_slashing
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v2-beacon-block-proposer-slashing
         acknowledgements:
@@ -551,7 +551,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v2_beacon_block_attester_slashing
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v2-beacon-block-attester-slashing
         acknowledgements:
@@ -567,7 +567,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v2_beacon_block_bls_to_execution_change
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v2-beacon-block-bls-to-execution-change
         acknowledgements:
@@ -583,7 +583,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v2_beacon_block_execution_transaction
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v2-beacon-block-execution-transaction
         acknowledgements:
@@ -601,7 +601,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v2_beacon_block_voluntary_exit
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v2-beacon-block-voluntary-exit
         acknowledgements:
@@ -617,7 +617,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v2_beacon_block_deposit
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v2-beacon-block-deposit
         acknowledgements:
@@ -633,7 +633,7 @@ vector:
           max_events: 500000
         inputs:
           - xatu_server_events_router.eth_v2_beacon_block_withdrawal
-        bootstrap_servers: NOT_SET
+        bootstrap_servers: xatu-kafka-kafka-bootstrap.xatu-eth.svc.cluster.local:9092
         key_field: "event.id"
         topic: beacon-api-eth-v2-beacon-block-withdrawal
         acknowledgements:
