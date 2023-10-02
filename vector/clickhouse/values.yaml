@@ -21,7 +21,7 @@ vector:
 
   secrets:
     generic:
-      clickhouse_endpoint: chendpoint-xatu-clickhouse.xatu-eth.svc.cluster.local:9000
+      clickhouse_endpoint: chendpoint-xatu-clickhouse.xatu-eth.svc.cluster.local:8123
       clickhouse_password: validators2023
 
   env:

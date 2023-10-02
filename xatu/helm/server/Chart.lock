@@ -1,0 +1,6 @@
+dependencies:
+- name: xatu-server
+  repository: https://ethpandaops.github.io/ethereum-helm-charts
+  version: 0.0.10
+digest: sha256:118900fe91eae70c622e3e772cf6684244d4d48d470bb2b03f97b3ec53adb4be
+generated: "2023-10-02T10:16:51.518988944Z"
