@@ -37,7 +37,18 @@ cluster:
         size: 100Gi
         class: standard-gp3
         deleteClaim: false
-
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: eks.amazonaws.com/nodegroup
+                  operator: In
+                  values:
+                  - ng-heavyload-blue
+                  - ng-heavyload-green
     readinessProbe:
       initialDelaySeconds: 15
       timeoutSeconds: 5
@@ -72,7 +83,18 @@ cluster:
         configMapKeyRef:
           name: "{{ include \"xatu-kafka.fullname\" $ }}-config"
           key: zookeeper-metrics-config.yml
-
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: eks.amazonaws.com/nodegroup
+                  operator: In
+                  values:
+                  - ng-heavyload-blue
+                  - ng-heavyload-green
   entityOperator:
     topicOperator: {}
     userOperator: {}
