@@ -1,7 +1,7 @@
 fullnameOverride: xatu-kafka
 
 labels:
-  protocol: ethereum
+  protocol: over
 
 cluster:
   kafka:
@@ -24,11 +24,11 @@ cluster:
     replicas: 2
     resources:
       requests:
-        cpu: 500m
-        memory: 1Gi
-      limits:
-        cpu: 1
+        cpu: 100m
         memory: 2Gi
+      limits:
+        cpu: 300m
+        memory: 4Gi
     storage:
       type: jbod
       volumes:
