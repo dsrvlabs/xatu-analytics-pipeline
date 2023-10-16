@@ -2,12 +2,12 @@ xatu-mimicry:
   fullnameOverride: xatu-mimicry
 
   resources:
-    limits:
-      cpu: 1024m
-      memory: 1536Mi
     requests:
-      cpu: 512m
+      cpu: 200m
       memory: 512Mi
+    limits:
+      cpu: 300m
+      memory: 1Gi
 
   terminationGracePeriodSeconds: 300
 
@@ -17,21 +17,21 @@ xatu-mimicry:
     pprofAddr: ":6060"
     probeAddr: ":8080"
     captureDelay: 3m
-    name:  "xatu-eth-mimicry-dsrv"
+    name:  "xatu-over-mimicry-dsrv"
     coordinator:
       type: xatu
       config:
-        address: xatu-server.xatu-eth.svc.cluster.local:8080
+        address: xatu-server.xatu-over.svc.cluster.local:8080
         maxPeers: 100
         networkIds:
-        - 1
-        forkIdHashes:
-        - "0xdce96c2d"
+        - 4949
+        # forkIdHashes:
+        # - "0xdce96c2d"
     outputs:
     - name: grpc
       type: xatu
       config:
-        address: xatu-server.xatu-eth.svc.cluster.local:8080
+        address: xatu-server.xatu-over.svc.cluster.local:8080
         maxExportBatchSize: 32
     - name: stdout
       type: stdout

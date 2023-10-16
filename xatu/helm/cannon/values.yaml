@@ -2,26 +2,26 @@ xatu-cannon:
   fullnameOverride: xatu-cannon
 
   resources:
-    limits:
-      cpu: 1
-      memory: 2Gi
     requests:
-      cpu: 250m
+      cpu: 100m
       memory: 512Mi
+    limits:
+      cpu: 200m
+      memory: 512Gi
 
   config:
     logging: "info"
     metricsAddr: ":9090"
     pprofAddr: ":6060"
-    name: "xatu-eth-cannon-dsrv"
+    name: "xatu-over-cannon-dsrv"
     ethereum:
-      beaconNodeAddress: https://cl.eth.rootwarp.dev
+      beaconNodeAddress: http://68.183.238.28:3500
       beaconNodeHeaders: {} #FILL_ME
       blockCacheSize: 3000
       blockCacheTtl: 3h
       blockPreloadWorkers: 15
     coordinator:
-      address: xatu-server.xatu-eth.svc.cluster.local:8080
+      address: xatu-server.xatu-over.svc.cluster.local:8080
       # tls: true
       # headers:
       #   authorization: FILL_ME
@@ -29,7 +29,7 @@ xatu-cannon:
     - name: grpc
       type: xatu
       config:
-        address: xatu-server.xatu-eth.svc.cluster.local:8080
+        address: xatu-server.xatu-over.svc.cluster.local:8080
         maxQueueSize: 1000000
         # tls: true
         # headers:

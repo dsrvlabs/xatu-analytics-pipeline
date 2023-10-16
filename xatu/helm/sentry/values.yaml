@@ -5,14 +5,14 @@ ethpandaops:
 ethereum-node:
   global:
     main:
-      network: mainnet
+      network: allay
       # engineEndpoint: http://{{ .Values.global.ethpandaops.network }}-eleel-{{ .Values.global.ethpandaops.group }}-execution:8552 # The canonical Eleel CL should override this
       # beaconEndpoint: http://{{ .Values.global.ethpandaops.instance }}-beacon:5052
       # rpcEndpoint: http://{{ .Values.global.ethpandaops.instance }}-execution:8545
       #
       # engineEndpoint: http://{{ .Values.global.ethpandaops.network }}-eleel-{{ .Values.global.ethpandaops.group }}-execution:8552 # The canonical Eleel CL should override this
-      beaconEndpoint: https://cl.eth.rootwarp.dev
-      rpcEndpoint: https://el.eth.rootwarp.dev
+      beaconEndpoint: http://68.183.238.28:3500
+      rpcEndpoint: http://68.183.238.28:22000
   ethereum-metrics-exporter:
     enabled: true
     resources:
@@ -29,10 +29,21 @@ ethereum-node:
     terminationGracePeriodSeconds: 300
     resources:
       requests:
-        cpu: 64m
-        memory: 128Mi
+        cpu: 100m
+        memory: 512Mi
       limits:
+        cpu: 200m
         memory: 1024Mi
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: eks.amazonaws.com/nodegroup
+              operator: In
+              values:
+              - ng-heavyload-blue
+              - ng-heavyload-green
     config:
       pprofAddr: ":6060"
       ntpServer: time.google.com
@@ -63,49 +74,49 @@ ethereum-node:
       outputs:
       - name: grpc-general
         type: xatu
-        # filter:
-        #   eventNames:
-        #     - BEACON_API_ETH_V1_EVENTS_UNKNOWN
-        #     - BEACON_API_ETH_V1_BEACON_COMMITTEE
-        #     - BEACON_API_ETH_V1_EVENTS_BLOCK
-        #     - BEACON_API_ETH_V1_EVENTS_BLOCK_V2
-        #     - BEACON_API_ETH_V1_EVENTS_CHAIN_REORG
-        #     - BEACON_API_ETH_V1_EVENTS_CHAIN_REORG_V2
-        #     - BEACON_API_ETH_V1_EVENTS_FINALIZED_CHECKPOINT
-        #     - BEACON_API_ETH_V1_EVENTS_FINALIZED_CHECKPOINT_V2
-        #     - BEACON_API_ETH_V1_EVENTS_HEAD
-        #     - BEACON_API_ETH_V1_EVENTS_HEAD_V2
-        #     - BEACON_API_ETH_V1_EVENTS_VOLUNTARY_EXIT
-        #     - BEACON_API_ETH_V1_EVENTS_VOLUNTARY_EXIT_V2
-        #     - BEACON_API_ETH_V1_EVENTS_CONTRIBUTION_AND_PROOF
-        #     - BEACON_API_ETH_V1_EVENTS_CONTRIBUTION_AND_PROOF_V2
-        #     - BEACON_API_ETH_V1_VALIDATOR_ATTESTATION_DATA
-        #     - MEMPOOL_TRANSACTION
-        #     - MEMPOOL_TRANSACTION_V2
-        #     - BEACON_API_ETH_V2_BEACON_BLOCK
-        #     - BEACON_API_ETH_V2_BEACON_BLOCK_V2
+        filter:
+          eventNames:
+            - BEACON_API_ETH_V1_EVENTS_UNKNOWN
+            - BEACON_API_ETH_V1_BEACON_COMMITTEE
+            - BEACON_API_ETH_V1_EVENTS_BLOCK
+            - BEACON_API_ETH_V1_EVENTS_BLOCK_V2
+            - BEACON_API_ETH_V1_EVENTS_CHAIN_REORG
+            - BEACON_API_ETH_V1_EVENTS_CHAIN_REORG_V2
+            - BEACON_API_ETH_V1_EVENTS_FINALIZED_CHECKPOINT
+            - BEACON_API_ETH_V1_EVENTS_FINALIZED_CHECKPOINT_V2
+            - BEACON_API_ETH_V1_EVENTS_HEAD
+            - BEACON_API_ETH_V1_EVENTS_HEAD_V2
+            - BEACON_API_ETH_V1_EVENTS_VOLUNTARY_EXIT
+            - BEACON_API_ETH_V1_EVENTS_VOLUNTARY_EXIT_V2
+            - BEACON_API_ETH_V1_EVENTS_CONTRIBUTION_AND_PROOF
+            - BEACON_API_ETH_V1_EVENTS_CONTRIBUTION_AND_PROOF_V2
+            - BEACON_API_ETH_V1_VALIDATOR_ATTESTATION_DATA
+            - MEMPOOL_TRANSACTION
+            - MEMPOOL_TRANSACTION_V2
+            - BEACON_API_ETH_V2_BEACON_BLOCK
+            - BEACON_API_ETH_V2_BEACON_BLOCK_V2
         config:
-          address: xatu-server.xatu-eth.svc.cluster.local:8080
+          address: xatu-server.xatu-over.svc.cluster.local:8080
           maxExportBatchSize: 10000
           maxQueueSize: 1000000
-          # - name: grpc-attestation
-          #   type: xatu
-          #   filter:
-          #     eventNames:
-          #       - BEACON_API_ETH_V1_EVENTS_ATTESTATION
-          #       - BEACON_API_ETH_V1_EVENTS_ATTESTATION_V2
-          #   config:
-          #     address: xatu-server.xatu-eth.svc.cluster.local:8080
-          #     maxExportBatchSize: 10000
-          #     maxQueueSize: 1000000
-          # - name: grpc-fork-choice
-          #   type: xatu
-          #   filter:
-          #     eventNames:
-          #       - BEACON_API_ETH_V1_DEBUG_FORK_CHOICE
-          #       - BEACON_API_ETH_V1_DEBUG_FORK_CHOICE_V2
-          #       - BEACON_API_ETH_V1_DEBUG_FORK_CHOICE_REORG
-          #       - BEACON_API_ETH_V1_DEBUG_FORK_CHOICE_REORG_V2
-          #   config:
-          #     address: xatu-server.xatu-eth.svc.cluster.local:8080
-          #     maxExportBatchSize: 128
+      - name: grpc-attestation
+        type: xatu
+        filter:
+          eventNames:
+            - BEACON_API_ETH_V1_EVENTS_ATTESTATION
+            - BEACON_API_ETH_V1_EVENTS_ATTESTATION_V2
+        config:
+          address: xatu-server.xatu-over.svc.cluster.local:8080
+          maxExportBatchSize: 10000
+          maxQueueSize: 1000000
+      - name: grpc-fork-choice
+        type: xatu
+        filter:
+          eventNames:
+            - BEACON_API_ETH_V1_DEBUG_FORK_CHOICE
+            - BEACON_API_ETH_V1_DEBUG_FORK_CHOICE_V2
+            - BEACON_API_ETH_V1_DEBUG_FORK_CHOICE_REORG
+            - BEACON_API_ETH_V1_DEBUG_FORK_CHOICE_REORG_V2
+        config:
+          address: xatu-server.xatu-over.svc.cluster.local:8080
+          maxExportBatchSize: 128
