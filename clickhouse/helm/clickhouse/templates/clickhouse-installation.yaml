@@ -104,6 +104,15 @@ spec:
                     {{- end }}
                 topologyKey: kubernetes.io/hostname
           {{- end }}
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: "eks.amazonaws.com/nodegroup"
+                  operator: In
+                  values:
+                  - "ng-heavyload-blue"
+                  - "ng-heavyload-green"
         containers:
           {{- if $podTemplate.spec.containers }}
           {{- tpl (toString ($podTemplate.spec.containers | toYaml)) $ | nindent 10 }}
