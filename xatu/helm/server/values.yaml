@@ -11,7 +11,7 @@ xatu-server:
   autoscaling:
     enabled: true
     minReplicas: 1
-    maxReplicas: 2
+    maxReplicas: 1
     targetCPUUtilizationPercentage: 85
 
   podDisruptionBudget:
@@ -20,10 +20,10 @@ xatu-server:
 
   resources:
     requests:
-      cpu: 100m
+      cpu: 200m
       memory: 256Mi
     limits:
-      cpu: 300m
+      cpu: 1
       memory: 512Mi
 
   affinity:
@@ -46,12 +46,12 @@ xatu-server:
           mkdir -p /etc/maxmind/
           cd /etc/maxmind/
           apk add wget
-          wget -O city.tar.gz "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=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&suffix=tar.gz"
+          wget -O city.tar.gz "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=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&suffix=tar.gz"
           tar -xf city.tar.gz
           mv "$(ls -d */|head -n 1)/GeoLite2-City.mmdb" ./
           rm -rf $(ls -d */|head -n 1)
           rm city.tar.gz
-          wget -O city.tar.gz "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=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&suffix=tar.gz"
+          wget -O city.tar.gz "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=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&suffix=tar.gz"
           tar -xf city.tar.gz
           mv "$(ls -d */|head -n 1)/GeoLite2-ASN.mmdb" ./
           rm -rf $(ls -d */|head -n 1)
