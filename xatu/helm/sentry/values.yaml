@@ -5,14 +5,14 @@ ethpandaops:
 ethereum-node:
   global:
     main:
-      network: allay
+      network: blaze
       # engineEndpoint: http://{{ .Values.global.ethpandaops.network }}-eleel-{{ .Values.global.ethpandaops.group }}-execution:8552 # The canonical Eleel CL should override this
       # beaconEndpoint: http://{{ .Values.global.ethpandaops.instance }}-beacon:5052
       # rpcEndpoint: http://{{ .Values.global.ethpandaops.instance }}-execution:8545
       #
       # engineEndpoint: http://{{ .Values.global.ethpandaops.network }}-eleel-{{ .Values.global.ethpandaops.group }}-execution:8552 # The canonical Eleel CL should override this
-      beaconEndpoint: http://68.183.238.28:3500
-      rpcEndpoint: http://68.183.238.28:22000
+      beaconEndpoint: http://139.59.105.233:3500
+      rpcEndpoint: http://139.59.105.233:22000
   ethereum-metrics-exporter:
     enabled: true
     resources:

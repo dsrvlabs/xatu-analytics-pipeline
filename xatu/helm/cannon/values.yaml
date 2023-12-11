@@ -15,7 +15,7 @@ xatu-cannon:
     pprofAddr: ":6060"
     name: "xatu-over-cannon-dsrv"
     ethereum:
-      beaconNodeAddress: http://68.183.238.28:3500
+      beaconNodeAddress: http://139.59.105.233:3500
       beaconNodeHeaders: {} #FILL_ME
       blockCacheSize: 3000
       blockCacheTtl: 3h

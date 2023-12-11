@@ -85,7 +85,7 @@ xatu-server:
           asn: /etc/maxmind/GeoLite2-ASN.mmdb
     persistence:
       enabled: true
-      connectionString: postgres://admin:validators2023@svc-postgres-xatu.xatu-over.svc.cluster.local:5432/xatu_over?sslmode=disable
+      connectionString: postgres://<HIDDEN>:<HIDDEN>@svc-postgres-master.db.svc.cluster.local:5432/xatu_over_blaze?sslmode=disable
       driverName: postgres
       maxIdleConns: 2
       maxOpenConns: 3

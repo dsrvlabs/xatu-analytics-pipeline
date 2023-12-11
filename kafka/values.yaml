@@ -5,7 +5,7 @@ labels:
 
 cluster:
   kafka:
-    version: 3.4.0
+    version: 3.5.0
     listeners:
     - name: plain
       port: 9092
@@ -71,7 +71,7 @@ cluster:
           name: "{{ include \"xatu-kafka.fullname\" $ }}-config"
           key: kafka-metrics-config.yml
   zookeeper:
-    replicas: 3
+    replicas: 1
     storage:
       type: persistent-claim
       size: 20Gi
